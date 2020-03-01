@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="description" content="">
+  <meta name="author" content="Hardy">
+  <meta name="keywords" content="">
+  <title>MySQL基础2 ~ To be is to do!</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>To be is to do!</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 二月 10日 2020, 10:42 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    4k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      15 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="第二篇：数据查询语言DQL"><a href="#第二篇：数据查询语言DQL" class="headerlink" title="第二篇：数据查询语言DQL"></a>第二篇：数据查询语言DQL</h1><h2 id="Part1-基础查询"><a href="#Part1-基础查询" class="headerlink" title="Part1: 基础查询"></a>Part1: 基础查询</h2><p>核心的关键查询词：select<br>它可以用于查询表中的字段、常量、表达式、函数等，查询结果是一个<strong>虚拟表格</strong>。</p>
+<p>查询常量的方法：<br>select 常量；<br>例1：查询”jerry” </p>
+<pre><code>select &quot;jerry&quot;;
+</code></pre><blockquote>
+<p>备注：查询的常量，可以是数字，字符串等常量格式。         </p>
+</blockquote>
+<p>查询表格中1个字段的语法：<br>select 字段名 from 表格名;<br>例2：从员工表employees中查询员工的姓名：  </p>
+<pre><code>select name from employees;
+</code></pre><p>查询表格中多个字段的语法：<br>select 字段名1， 字段名2， …, 字段名n from 表名；<br>例3：从员工表employees中查询员工的名字和工号：  </p>
+<pre><code>select name, id from employees;
+</code></pre><p>给查询的字段起别名：<br>select 字段 as 别名 from 表名;<br>例4：从员工表employees中查询员工的姓名，并命名为”姓名”显示：  </p>
+<pre><code>select name &quot;姓名&quot; from employees;
+</code></pre><blockquote>
+<p>备注: as可加可不加；</p>
+</blockquote>
+<p>查询函数：<br>select 函数；<br>例5：查询当前mysql的版本号:    </p>
+<pre><code>select version();
+</code></pre><h2 id="Part2-条件查询"><a href="#Part2-条件查询" class="headerlink" title="Part2: 条件查询"></a>Part2: 条件查询</h2><p>基本语法如下：<br>select 字段 from 表名 where 筛选条件;<br>执行顺序：</p>
+<ol>
+<li>首先检查from 表名中的表格是否存在；    </li>
+<li>然后检查where中的筛选条件;    </li>
+<li>最后将结果显示select出来；    </li>
+</ol>
+<p>按照条件表达式筛选：<br>补充：条件预运算符有 &gt; &lt; = &lt;&gt; &gt;= &lt;=<br>例6：查询员工表employees中工资&gt;10000元的员工的姓名：<br>select name from employees where salary&gt;10000;</p>
+<p>按照逻辑表达式筛选：<br>补充：逻辑运算符有 &amp; | ！ and or not<br>例7：查询员工表employees中工资&gt;10000元且工号小于100的员工的姓名:    </p>
+<pre><code>select name    
+from employees    
+where salary &gt; 10000 and id &lt; 100;
+</code></pre><p>按照模糊查询的方式筛选：<br>补充：模糊查询方法有 like, between and, in, is null<br>例8：查询员工表employees中邮箱名字包含字母e的员工的姓名:     </p>
+<pre><code>select name    
+from employees    
+where email like &quot;%e%&quot;;
+</code></pre><p>例9：查询员工表employees中邮箱的第3个字母是e的员工的姓名:   </p>
+<pre><code>select name   
+from employees    
+where email like &quot;__e%&quot;;
+</code></pre><blockquote>
+<p>备注：%表示字符型通配符，可以表示0个或者多个；<br>_也表示字符型通配符，但是只能表示一个；<br>例10：查询员工表employees中工资在8000-10000的员工的姓名：    </p>
+<pre><code>select name    
+from employees    
+where salary between 8000 and 10000;
+</code></pre><p>备注：between and 的结构中，第一个数字要比第二个小；<br>例11：查询员工表employees中工种是”IT”,”VP”,”PRSE”的员工姓名：    </p>
+<pre><code>select name    
+from employees    
+where job_title in (&quot;IT&quot;, &quot;VP&quot;, &quot;PRES&quot;);
+</code></pre></blockquote>
+<h2 id="Part3-排序查询"><a href="#Part3-排序查询" class="headerlink" title="Part3: 排序查询"></a>Part3: 排序查询</h2><p>排序查询的语法如下：<br>select 字段名 from 表名 where 筛选条件 order by 排序条件 排序方法；    </p>
+<blockquote>
+<p>备注：排序方法有两种 asc代表升序排列，可省略； desc代表降序排列，不可省略。<br>其中语法执行的顺序为：       </p>
+<ol>
+<li>from 表名    </li>
+<li>where 筛选条件    </li>
+<li>select 字段名    </li>
+<li>order by 排序条件 排序方法；    </li>
+</ol>
+</blockquote>
+<p>单次排序：<br>例12：将员工表employees中的员工姓名按照工资的降序排列：   </p>
+<pre><code>select name     
+from employees    
+order by salary desc;
+</code></pre><p>多次排序：<br>多次排序是指在主排序中出现排序相同的时候的次排序方案。<br>例13：将员工表employees中的员工先按照工资降序排序，再按照工号升序排序： </p>
+<pre><code>select name    
+from employees    
+order by salary desc, id asc;
+</code></pre><h2 id="Part4-常见函数"><a href="#Part4-常见函数" class="headerlink" title="Part4: 常见函数"></a>Part4: 常见函数</h2><h3 id="A-字符函数"><a href="#A-字符函数" class="headerlink" title="A. 字符函数"></a>A. 字符函数</h3><p>1.length();输出括号内有几个字节；备注：1个汉字3个字节，1个字母1个字节（utf8)<br>2.contact();拼接字符，例如：contact(last_name,’-‘,first_name);<br>3.upper();小写字母变大写字母；<br>4.lower();大写字母变小写字母；<br>5.substr();输出字符中的一部分，使用方法：<br>  substr(string, a, b)表示从字符串string中的第a个字符开始，到第b个字符，<br>  如果只有一个字母，则默认到最后；    </p>
+<blockquote>
+<p>备注：这里是字符，并不是字节；<br>备注：mysql中的字符是从1开始，而非0； </p>
+</blockquote>
+<p>6.instr();返回目标出现的第一个位置，使用方法：<br>   instr(string, a)输出a在string中第一次出现的位置;<br>7.trim();去掉前后的字符，使用方法：<br>   例14：trim(‘   张翠山   ‘)输出’张翠山’，前后的’ ‘被去掉了；<br>   例15：trim(‘a’ from ‘aaa张翠山aaa’）输出’张翠山’，前后的’a’被全掉了;<br>8.lpad()；字符串的左边用指定字符进行填充，使用方法：<br>   例16：lpad(‘张翠山’,10,’a’)输出’aaaaaaa张翠山’，其中10表示输出总长度；<br>9.rpad()；字符串的右边用指定字符进行填充，使用方法：<br>   例17：rpad(‘张翠山’,10,’a’)输出’张翠山aaaaaaa’，其中10表示输出总长度；   </p>
+<blockquote>
+<p>备注：如果本身字符串的长度就大于输出的总长度的话，则输出保持不变；</p>
+</blockquote>
+<p>10.repalce();替换字符串，用法如下：<br>   replace(string, a, b)将字符串中的a用b替换；   </p>
+<h3 id="B-数学函数"><a href="#B-数学函数" class="headerlink" title="B. 数学函数"></a>B. 数学函数</h3><p>1.round();四舍五入函数；<br>2.ceil();向上取整函数，也就是返回大于等于当前这个输入数据的最小整数；<br>3.floor();向下取整函数，也就是返回小于等于当前这个输入数据的最大整数；<br>4.truncate();截断函数，干掉小数点后面的数字，用法如下：<br>   例18：truncate(1.699,1)输出1.6<br>5.mod();取余函数,用法如下：<br>   例19：mod(10,3)输出1    </p>
+<blockquote>
+<p>备注：公式为mod(a,b) = a-a/b*b    </p>
+<h3 id="C-日期函数"><a href="#C-日期函数" class="headerlink" title="C. 日期函数"></a>C. 日期函数</h3><p>1.now();返回当前的系统日期+时间，格式为：’2020-02-09 14:37:18’;<br>2.curdate(); 返回当前的系统日期,格式为：’2020-02-09’;<br>3.curtime(); 返回当前的系统时间,格式为：’14:37:18’;<br>4.分别获取系统的年月日：<br>   select year(now());<br>   select month(now());<br>   select day(now());<br>5.str_to_date();将日期格式转换为指定格式：<br>   例20：str_to_date(‘9-13-1999’,’%m-%d-%y’);输出为’2019-09-13’，其中‘%m-%d-%y’是通知这个函数，你输入的时间格式中，哪个是年月日，然后再按照标准化输出；<br>6.date_fromat();将日期转换为字符：<br>   例21：date_format(now(),’%y年%m月%d日’)；输出为’20年02月09日’;<br>备注：因为输出写的是y，所以是20年；如果写为Y，就是2020年；<br>备注：看清楚函数，是date_format而不是date_formate   </p>
+<h3 id="D-流程控制函数"><a href="#D-流程控制函数" class="headerlink" title="D. 流程控制函数"></a>D. 流程控制函数</h3><ol>
+<li>if函数<br>语法结构为：if(exp1, exp2, exp3)如果exp1真，那么执行exp2；否则执行exp3；</li>
+<li>case函数<br>语法1：switch (变量)<br>{<br>case 常量： 语句， break<br>…<br>default 语句<br>}<br>语法2：<br>case 字段或者表达式<br>when 常量1 then 语句1<br>…<br>else 语句n（默认情况)</li>
+</ol>
+</blockquote>
+<h2 id="Part5-分组函数"><a href="#Part5-分组函数" class="headerlink" title="Part5: 分组函数"></a>Part5: 分组函数</h2><ol>
+<li>sum(); 求和</li>
+<li>avg(); 均值；</li>
+<li>max(); 最大值;</li>
+<li>min(); 最小值;</li>
+<li>count(); 统计函数;<br>例22：求员工表employees中所有员工的平均工资：        <pre><code>select avg(salary) from employees;
+</code></pre>例23：求员工表employees中所有员工的工资之和：    <pre><code>select sum(salary) from employees;
+</code></pre>例24：统计员工表employees中共有多少名员工:    <pre><code>select count(*) from employees;
+</code></pre></li>
+</ol>
+<h2 id="Part6-分组查询"><a href="#Part6-分组查询" class="headerlink" title="Part6: 分组查询"></a>Part6: 分组查询</h2><p>分组查询的语法如下：<br>select 字段名<br>from 表名<br>where 筛选条件<br>group by 分组条件<br>order by 排序条件 排序方法<br>执行的顺序如下：</p>
+<ol>
+<li>from 表名    </li>
+<li>where 筛选条件    </li>
+<li>group by 分组条件   </li>
+<li>select 字段名    </li>
+<li>order by 排序条件 排序方法   </li>
+</ol>
+<p>例25：查询员工表employees中的每个工种的最高工资：     </p>
+<pre><code>select max(salary)    
+from employees  
+group by job_id;
+</code></pre><p>例26：查询员工表employees中哪个部门的员工数目&gt;2：    </p>
+<pre><code>select count(*)   
+from employees        
+group by department_id        
+having count(*)&gt;2;
+</code></pre><p>备注：having 表示在上述的表格的结果中进行筛选，从某个表+筛选条件的角度来说，生成的是虚拟表格，having 就是在这个基础上进行筛选的。<br>备注：加了having之后的执行顺序是：</p>
+<ol>
+<li>from 表名;</li>
+<li>where 筛选条件；</li>
+<li>group by 分组条件；</li>
+<li>having 筛选条件；</li>
+<li>select 字段；</li>
+<li>order by 排序条件 排序方法；</li>
+</ol>
+<p>联合查询：<br>例27：查询员工表employees中每个部门每个工种的平均工资：<br>首先要理解题意，不同部门是存在不同的工种的，所以要分类执行，输出结果按照笛卡尔排序的方法；</p>
+<pre><code>select avg(salary)    
+from employees    
+group by depatrtment_id, job_id;
+</code></pre><blockquote>
+<p>备注：这里的department_id， job_id的形式，已经将两者搭配在一起了，形成了想要的结果。</p>
+</blockquote>
+<h2 id="Part7-连接查询"><a href="#Part7-连接查询" class="headerlink" title="Part7: 连接查询"></a>Part7: 连接查询</h2><p>连接查询，相较于上述的查询方式的主要区别如下：<br>上述查询方式是只用一张表的信息就足够了<br>连接查询希望借助不同表格的信息，对查询的数据进行优化    </p>
+<p>连接查询的语法如下：<br>select 字段名<br>from  表格1<br>[type]  join 表格2<br>on 连接条件<br>where 筛选条件<br>group by 分组条件<br>having 筛选条件<br>order by 排序条件 排序方法<br>执行顺序记忆方法如下：<br>表格1 [type] join 表格2 on 连接条件<br>形成了一个新的表格，其余方法参考之前的内容</p>
+<p>type的类型1：等值连接<br>这种方法是指相互连接的两个表格之间的关系是平等的，此时type=inner，可以省略<br>例28：根据员工表employees和部门表department，查询工资&gt;10000的员工所在的部门的名字：     </p>
+<pre><code>select departmnent_name    
+from employees  e
+join departments  d   
+on e.department_id = d.department_id
+where salary&gt;10000;
+</code></pre><blockquote>
+<p>备注：如果需要去重，请使用函数dinstinct();</p>
+</blockquote>
+<p>实现三表连接：<br>例29：查询员工名，部门名和所在的城市：    </p>
+<pre><code>select name, department_name, city        
+from departments d    
+join employees e    
+on e.department_id = d.department_id    
+join locations l      
+on d.location_id = l.location_id;
+</code></pre><blockquote>
+<p>备注：这里是按照多重的join的方式，将不同的表格联合在一起；要做到能够和另外两个表格都连接的表格放在最前面，这样方便进行连接；</p>
+</blockquote>
+<p>type的类型2：非等值连接<br>非等值连接，意味着值之间的连接方式不是由等号确定的，也就是其他的关系。<br>例30：查询员工的姓名和工资的等级:        </p>
+<pre><code>select name, level    
+from employees
+join salary_grade    
+on employees.salary between salary_grade.lowest_sal and salary_grade.highest_sal;
+</code></pre><p>type的类型3：自连接<br>顾名思义，自连接就是自己和自己连接，也就是表格中的两个字段之间产生了关联，然后形成一个新的表格了。<br>例31：查询员工表employees中员工名和他的领导的名字:      </p>
+<pre><code>select e.name, m.name
+from employees e
+join employees m    
+on e.manager_id = m.id;
+</code></pre><blockquote>
+<p>备注：这个例子中，表格中的一些行，既是领导，也是员工，所以要自己与自己连接，注意上述例子中通过不同的别名实现了对同一个表格的区分；    </p>
+</blockquote>
+<p>type的类型4：左外连接<br>左外连接的意思是，将第一个表格作为关键表，第二个表格作为不关键表；左外连接与内连接的区别在于第一个表格的所有内容将会被保留，第二个表格的内容，如果与第一个表格有关系，则被保留，否则不保留。<br>例32：找出女生表格beauty中男朋友不出现在男生表格boy中的女生的姓名：    </p>
+<pre><code>select b.name    
+from beauty b    
+left outer join boy bo    
+on b.bf_id = bo.id    
+where bo.id is null;
+</code></pre><blockquote>
+<p>备注：这里使用where表示，from 后面的一串形式，就是一个表格；</p>
+</blockquote>
+<p>type的类型5：右外连接<br>右外连接的意思是，将第一个表格作为不关键表，第二个表格作为关键表；右外连接与内连接的区别在于第二个表格的所有内容将会被保留，第一个表格的内容，如果与第一个表格有关系，则被保留，否则不保留。<br>例33：找出女生表格beauty中男朋友不出现在男生表格boy中的女生的姓名：    </p>
+<pre><code>select b.name    
+from boy bo   
+right outer join beauty b  
+on b.bf_id = bo.id    
+where bo.id is null;
+</code></pre><p>type的类型6：全外连接<br>全外连接的意思是，将所有的都显示出来，但是是按照一定的连接方式。与前述的连接方式的区别在于，两个表内连接的部分将会被保留，一个表有，另一个表没有的部分也将被保留。<br>例34：显示出男生表boy和女生表beauty的全部内容，并将互为男女朋友的放在一起：    </p>
+<pre><code>select bo.*, b.*    
+from beauty b    
+full outer join boy bo    
+on bo.id = b.bf_id;
+</code></pre><p>type的类型7：交叉连接<br>交叉连接的意思是，将两个表格的内容互相连，每种可能的情况都遍历一遍<br>例35：显示出男生表boy和女生表beauty中的男女可能凑成的情侣的情况：    </p>
+<pre><code>select bo.name, b.name    
+from beauty b
+cross join boy bo;
+</code></pre><blockquote>
+<p>备注：以上几种连接方式的区别总结如下：<br>内连接表示两个表格之间的交集；<br>左外和右外连接表示使用一个表的全部和另一个表中有用的信息，相当于交集加上一个集合；<br>全外连接，表示两个表格的信息全部按照一定的规则使用，相当于全集；<br>交叉连接，表示两个表格所有可能出现的组合情况，也叫笛卡尔连接。    </p>
+</blockquote>
+<h2 id="Part8-子查询"><a href="#Part8-子查询" class="headerlink" title="Part8: 子查询"></a>Part8: 子查询</h2><p>子查询的意思是，将一个查询过程的结果作为另一个查询过程的条件。一般情况下，可以在from后的表格中加入子查询，where/having后的筛选条件中加入子查询.<br>备注：子查询的优先级高于主查询的；    </p>
+<p>类型1：单行子查询<br>单行子查询的意思是，子查询的结果是一个值<br>例36：查询员工表employees中工资比sobel高的员工的姓名：    </p>
+<pre><code>select name
+from employees
+where salary&gt;(
+select salary
+from employees
+where name = &#39;sboel&#39;
+);
+</code></pre><p>备注：这里的查询结果就是一个值，也就是1个工资的结果；    </p>
+<p>类型2：多行子查询<br>多行子查询的意思是，子查询的结果是很多值<br>例37：查询平均工资最低的部门编号：    </p>
+<pre><code>select department_id, avg(salary)      
+from employees  
+group by department_id  
+having avg(salary) = (
+select min(avg(salary))
+from (
+select avg(salary)
+from employees
+group by department_id
+)   
+);
+</code></pre><blockquote>
+<p>备注：其中，表征每个部门的平均工资的表格就是输出的多行子查询；<br>另外，还准备了一个多行子查询的经典例题：<br>例38：查询各个部门中，工资比本部门平均工资高的员工的姓名：     </p>
+<pre><code>select name
+from employees e   
+join (
+select avg(salary) ag, department_id
+from employees
+group by department_id    
+) f
+on e.department_id = f.department_id
+where e.salary &gt; f.ag    
+group by e.department_id;
+</code></pre><p>备注：如果多行子查询结果输出的话，需要将子查询的结果与目标相关联，才方便进行筛选；    </p>
+</blockquote>
+<h2 id="Part9-分页查询"><a href="#Part9-分页查询" class="headerlink" title="Part9: 分页查询"></a>Part9: 分页查询</h2><p>分页查询表示查询出的结果长度。语法如下：<br>select 字段名<br>from 表名1<br>[type] join 表名2<br>on 连接条件<br>where 筛选条件<br>group by 分组条件<br>having 筛选条件<br>order by 排序条件 排序方式<br>limit offset, size<br>执行顺序如下：       </p>
+<ol>
+<li>from 表名1</li>
+<li>[type] join 表名2</li>
+<li>on 连接条件</li>
+<li>where 筛选条件</li>
+<li>group by 分组条件</li>
+<li>having 分组条件</li>
+<li>select 字段名</li>
+<li>order by 排序条件 排序方式</li>
+<li>limit offset, size<blockquote>
+<p>备注:其中offset表示分页开始的地方，size表示表格的长度，这里offset从0开始；</p>
+</blockquote>
+</li>
+</ol>
+<p>例39：查询员工表employees中工资最高的10个人的名字：    </p>
+<pre><code>select name   
+from employees    
+order by salary desc
+limit 0, 10;
+</code></pre><h2 id="Part10-联合查询"><a href="#Part10-联合查询" class="headerlink" title="Part10: 联合查询"></a>Part10: 联合查询</h2><p>联合查询的意义在于，能够将多个查询语句分开写。<br>语法如下：<br>select 字段名1 from 表格1 where 筛选条件1<br>union<br>select 字段名2 from 表格2 where 筛选条件2；    </p>
+<blockquote>
+<p>备注：为了能够生成结果，需要保证筛选的字段名1和字段名2之间需要相互兼容；    </p>
+</blockquote>
+<p>例40：查询员工表employees中工资<3000和工资>10000的员工的姓名：    </p>
+<pre><code>select name
+from employees 
+where salary &gt; 10000 or salary &lt; 3000;
+</code></pre><pre><code>select name from employees where salary&lt;3000
+union
+select name from employees where salary&gt;10000;
+</code></pre><blockquote>
+<p>备注：两者的输出结果不一致，因为查询的方式不一致；<br>备注：union本身自带去重效果，如果要保留重复，要使用union all；    </p>
+</blockquote>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2020/02/10/MySQL基础2/';
+        this.page.identifier = '/2020/02/10/MySQL基础2/';
+      };
+      var oldLoad = window.onload;
+      window.onload = function () {
+        var d = document, s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.src = '//' + 'Fluid-dev' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+        powered by Disqus.</a></noscript>
+  </div>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MySQL基础2&nbsp;",
+      ],
+      cursorChar: "守拙",
+      typeSpeed: 70,
+      loop: ture,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

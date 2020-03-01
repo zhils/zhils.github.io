@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="description" content="">
+  <meta name="author" content="Hardy">
+  <meta name="keywords" content="">
+  <title>MySQL基础6 ~ To be is to do!</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>To be is to do!</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 二月 23日 2020, 12:11 中午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.5k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      10 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="第五篇：其余内容"><a href="#第五篇：其余内容" class="headerlink" title="第五篇：其余内容"></a>第五篇：其余内容</h1><p>本部分主要介绍MySQL基础中的其余内容，主要包含四大模块：视图，变量，存储过程和函数以及流程控制。<br>本章是数据库MySQL基础篇的最后一篇。        </p>
+<h2 id="Part-1-视图"><a href="#Part-1-视图" class="headerlink" title="Part 1: 视图"></a>Part 1: 视图</h2><p>视图是将一部分MySQL代码封装起来，做成类似于函数的形式，进行调用。视图的内容是生成一张表格的逻辑，结果是一个虚拟表。    </p>
+<blockquote>
+<p>备注：视图只是逻辑，并不存储数据，当需要调用的时候，系统运行即可产生数据，组成虚拟表格。      </p>
+</blockquote>
+<h3 id="1-1-视图的创建"><a href="#1-1-视图的创建" class="headerlink" title="1.1 视图的创建"></a>1.1 视图的创建</h3><p>视图创建的语法如下：<br>createview 视图名<br>as<br>DQL查询语言；    </p>
+<p>例1：查询员工表employees中员工邮箱名字包含字母a的员工的姓名，工号和工资<br>首先创建视图    </p>
+<pre><code>createview e
+as
+select name, id, salary
+from employees
+where email like &#39;%a%&#39;;
+</code></pre><h3 id="1-2-视图的使用"><a href="#1-2-视图的使用" class="headerlink" title="1.2 视图的使用"></a>1.2 视图的使用</h3><p>视图创建完毕之后，会产生相关的字段，这里的字段与原来的表格已经不同了，新生成的字段取决于创建视图的时候的字段名。<br>例1：查询员工表employees中员工邮箱名字包含字母a的员工的姓名，工号和工资<br>然后使用视图    </p>
+<pre><code>select * from e;
+</code></pre><h3 id="1-3-视图的修改"><a href="#1-3-视图的修改" class="headerlink" title="1.3 视图的修改"></a>1.3 视图的修改</h3><p>视图修改的语法有两种：     </p>
+<ol>
+<li>create or replace view 视图名 as DQL查询语言；    </li>
+<li>alter view 视图名 as DQL查询语言；    <blockquote>
+<p>备注：究其本质，视图的修改和创建没有什么区别，只是关键字换了。    </p>
+</blockquote>
+</li>
+</ol>
+<h3 id="1-4-视图的删除"><a href="#1-4-视图的删除" class="headerlink" title="1.4 视图的删除"></a>1.4 视图的删除</h3><p>删除视图的语法格式如下：<br>drop view 视图名；<br>这个语法可以一次删除多个，形式如下：<br>drop view 视图名1， 视图名2,…;<br>例2：删除例1创建的视图e</p>
+<pre><code>drop view e;
+</code></pre><h3 id="1-5-视图的查看"><a href="#1-5-视图的查看" class="headerlink" title="1.5 视图的查看"></a>1.5 视图的查看</h3><p>查看视图的语法格式如下：<br>show create view 视图名；</p>
+<h3 id="1-6-视图的更新"><a href="#1-6-视图的更新" class="headerlink" title="1.6 视图的更新"></a>1.6 视图的更新</h3><p>1.插入<br>插入语法与DML语言讲解的并无差别；<br>例3：在视图e中插入一个员工信息：张三，007,10000；    </p>
+<pre><code>insert into e values(&#39;张三&#39;,&#39;007&#39;,10000);
+</code></pre><blockquote>
+<p>备注：这里的插入会使得原始表的数据发生变化。</p>
+</blockquote>
+<p>2.修改<br>修改语法与DML语言讲解的并无差别；<br>例4：在视图e中修改员工张三的工资为12000；</p>
+<pre><code>update e set salary = 12000 where name = &#39;张三&#39;;
+</code></pre><p>3.删除<br>删除语法与DML语言讲解的并无差别；<br>例5：在视图e中删除员工张三的信息；</p>
+<pre><code>delete from e where name = &#39;张三&#39;;
+</code></pre><blockquote>
+<p>备注：一般不建议更新视图，因为视图本身的保存为逻辑，更新数据的话，会给视图的保存带来困难。<br>备注：当具备以下几种情形时，不可以更新视图：   </p>
+<ol>
+<li>包含分组函数，distinct, group by, having, union 或者 union all;     </li>
+<li>select 包含子查询;    </li>
+<li>join    </li>
+</ol>
+</blockquote>
+<h2 id="Part-2：变量"><a href="#Part-2：变量" class="headerlink" title="Part 2：变量"></a>Part 2：变量</h2><p>之前曾在MySQL基础4中介绍过MySQL的数据类型，这里对变量进行介绍。    </p>
+<blockquote>
+<p>备注：根据命名渠道，变量可以分为两种：系统变量和自定义变量。<br>根据作用范围，系统变量可分为：全局变量和会话变量<br>根据作用范围，自定义变量可分为：用户变量和局部变量    </p>
+</blockquote>
+<h3 id="2-1-系统变量"><a href="#2-1-系统变量" class="headerlink" title="2.1 系统变量"></a>2.1 系统变量</h3><p>是由系统定义在服务器层面的变量。    </p>
+<ol>
+<li>查看全局系统变量：show global variables;    </li>
+<li>查看会话全局变量：show session variables;    </li>
+<li>当需要增加查看的筛选条件时：<br>show global/session variables 筛选条件;    </li>
+<li>查看某个系统指定的变量的值：select @@系统变量名；    </li>
+<li>为某个系统变量赋值<br>set global/session 系统变量名 = 值；<br>set global/session.系统变量名 = 值；</li>
+</ol>
+<h3 id="2-2-自定义变量"><a href="#2-2-自定义变量" class="headerlink" title="2.2 自定义变量"></a>2.2 自定义变量</h3><p>是自己设置的，遵循“声明”-“赋值”-“使用”的顺序。<br>2.2.1 用户变量<br>用户变量是在整个会话中都可以使用的变量，           </p>
+<ol>
+<li>声明并初始化：set @变量名 = value 或者 set @变量名 ：= value 或者 select @用户变量名 ：= value;         </li>
+<li>赋值语句：select 字段 into 变量名 from 表名；<br>2.2.2 局部变量<br>局部变量是在begin end中间的变量    </li>
+<li>声明 declare 变量名 类型； 或者 declare 变量名 类型 default 值；    </li>
+<li>赋值与用户变量的赋值一样    </li>
+</ol>
+<blockquote>
+<p>备注：用户变量和局部变量的区别</p>
+<ol>
+<li>用户变量作用在整个会话中，而局部变量只能作用在begin end中；</li>
+<li>用户变量的语法必须加@符号不用限定类型，而局部变量则不用加@但是需要限定类型；</li>
+</ol>
+</blockquote>
+<h2 id="Part-3-存储过程和函数"><a href="#Part-3-存储过程和函数" class="headerlink" title="Part 3:存储过程和函数"></a>Part 3:存储过程和函数</h2><p>存储过程和函数，类似于Python中的方法，具有提高代码的可重复性，简化操作的优点。</p>
+<h3 id="3-1-存储过程"><a href="#3-1-存储过程" class="headerlink" title="3.1 存储过程"></a>3.1 存储过程</h3><p>存储过程可以理解为一组预先编译好的sql语言集合，类似于批处理文件。<br>存储过程的优点如下：</p>
+<ol>
+<li>提高了代码的可重复性；</li>
+<li>简化了操作；</li>
+<li>减少了编译次数以及和服务器连接的次数，从而提高了效率；</li>
+</ol>
+<p>存储过程的创建语法：<br>create process 存储过程名（参数列表）<br>begin<br>      存储过程体（一般的SQL语法）<br>end    </p>
+<blockquote>
+<p>备注：参数列表中的参数包含三部分（参数模式， 参数名， 参数类型）<br>参数模式：in out inout分表表示传入参数，传出参数以及都可以的参数；<br>备注：如果存储过程体只有1句话，那么begin 和 end 可以省略；<br>存储过程体中的每句SQL语言必须加分号；<br>存储过程的结尾可以用delimiter重新设置；    </p>
+</blockquote>
+<p>存储过程的调用语法：call 存储过程名(实参列表）；<br>例6：向employees表中插入5条记录：    </p>
+<pre><code>delimiter $  #首先设置结束标记
+create procedure pro1()
+begin 
+     insert into employees(字段名） values(值）；
+end $
+</code></pre><p>例7：创建存储过程，实现输入女生名，返回她的男朋友的信息：    </p>
+<pre><code>delimiter $    
+create procedure pro2(in name varchar(20))    
+begin     
+      select boys.name    
+      from boys   
+      right join girls   
+      on girls.boyfreind_id = boys.id   
+      where girls.name = name;   
+end $   
+call pro2(&#39;小龙女&#39;)$;# 调用过程也要加上结尾符号
+</code></pre><p>例8：创建存储过程，实现输入女生名，返回她的男朋友的信息：     </p>
+<pre><code>delimiter $
+create procedure pro3(in grils_name varchar(20)， out boys_name varchar(20))
+begin 
+      select boys.name into boys_name
+      from boys
+      right join girls
+      on girls.boyfreind_id = boys.id
+      where girls.name = name;
+end $    
+call pro3(&#39;小龙女&#39;,@boyname)$ # 调用过程也要加上结尾符号    
+select @boyname$  # 查看用户变量的时候，需要加@
+</code></pre><p>例9：传入a和b两个值，将它们翻倍：    </p>
+<pre><code>delimier $
+create procedure pro4(inout a int, inout b int)
+begin 
+     set a = a*2;
+     set b = b*2;
+end $
+set @m = 10$
+set @n = 20$
+call pro4(@m, @n)$
+select @m $
+select @n $
+</code></pre><p>存储过程的删除：drop procedure 存储过程名；    </p>
+<blockquote>
+<p>备注：每次只能删除一个存储过程；    </p>
+</blockquote>
+<p>存储过程的查看：show creat procedure 存储过程名；</p>
+<h3 id="3-2-函数"><a href="#3-2-函数" class="headerlink" title="3.2 函数"></a>3.2 函数</h3><p>与存储过程非常类似，也可以理解为一组SQL语言的批处理形式。<br>函数与存储过程的区别在于：函数必须有1个返回值，存储过程对返回值不做要求。    </p>
+<p>函数的创建语法：<br>create function 函数名(参数列表) returns 返回类型<br>begin<br>      函数体<br>end    </p>
+<blockquote>
+<p>备注：参数列表包含两部分：参数名，参数类型；<br>备注：函数体必须要有return命令，可以不放在函数体的最后；<br>备注：依然可以通过设置delimiter $设置结尾； </p>
+</blockquote>
+<p>例10：根据员工表employes返回公司的员工个数:</p>
+<pre><code>create function numCounting() returns int
+begin 
+    declare c int default 0;
+    select count(*) into c
+    from emplpoyees;
+    return c;
+end $
+select numCounting() $ # 调用的时候，直接用select
+</code></pre><p>例11：根据员工名返回他的工资:</p>
+<pre><code>create function salaryFind(name varchar(20)) returns double
+begin 
+      sel @sal = 0;
+      select salary into @sal
+      from emplpoyees
+      where employees.name = name;
+      return @sal;
+end $
+select salaryFind(&#39;张三&#39;) $ #调用
+</code></pre><p>函数的查看：show create function 函数名;<br>函数的删除：drop function 函数名；      </p>
+<h2 id="Part-4-流程控制简介"><a href="#Part-4-流程控制简介" class="headerlink" title="Part 4:流程控制简介"></a>Part 4:流程控制简介</h2><p>之前在C++或者Python中学到的流程为：顺序流程，分支流程，循环流程。在这里，流程也一样。</p>
+<h3 id="4-1-分支结构"><a href="#4-1-分支结构" class="headerlink" title="4.1 分支结构"></a>4.1 分支结构</h3><ol>
+<li>if函数<br>语法：if（表达式1， 表达式2， 表达式3）<br>与c++三元结构组一致，表达式1成立则执行2，否则执行3；       </li>
+<li>case函数<br>case有两种用法：<br>类型1：<br>case 变量/表达式/字段<br>when 要判断的值 then<br>…<br>else 操作<br>end case;<br>类型2：<br>case<br>when 要判断的条件1 then 操作1<br>when 要判断的条件2 then 操作2<br>…<br>else 操作n<br>end case;<br>例12：输入成绩，判断成绩等级：    <pre><code>create procedure scoreLevel(in score int)
+begin 
+  case 
+  when score&gt;90 then select &#39;A&#39;;
+  when score&gt;=80 then select &#39;B&#39;;
+  when score&gt;=60 then select &#39;C&#39;;
+  else select &#39;D&#39;;
+  end
+end $
+</code></pre></li>
+<li><p>if结构<br>if结构用于多重分支结构，语法如下：<br>if 要判断的条件1 then 操作1；<br>elseif 要判断的条件2 then 操作2；<br>…<br>end if;<br>这种if结构要用在begin end内部。<br>例12：输入成绩，判断成绩等级：   </p>
+<pre><code>create function scoreLevel(score int) returns char
+begin 
+  if score&gt;=90 then return &#39;A&#39;;
+  elseif score&gt;=80 then return &#39;B&#39;;
+  elseif score&gt;=60 then return &#39;C&#39;;
+  else return &#39;D&#39;;
+  end if;    
+end $
+</code></pre><h3 id="4-2-循环结构"><a href="#4-2-循环结构" class="headerlink" title="4.2 循环结构"></a>4.2 循环结构</h3><p>可能出现的形式：while loop repeat<br>循环控制：iterate类似于continue, leave类似于break;</p>
+</li>
+<li><p>while<br>语法：<br>while 循环条件 do<br>循环体<br>end while    </p>
+</li>
+<li><p>loop<br>语法：<br>loop<br>循环体<br>end loop;       </p>
+</li>
+<li><p>repeat<br>语法：<br>repeat<br>循环体<br>until 结束循环的条件<br>end repeat    </p>
+</li>
+</ol>
+<p>例13：向员工表employees中多次插入张三的信息：    </p>
+<pre><code>create procedure pro6(in insertCount int)
+begin 
+     declare i int default 1;
+     while i &lt; insertCount do
+         insert into employees(&#39;name&#39;, &#39;salary&#39;) values(&#39;张三&#39;,&#39;1000&#39;)
+         set i = i + 1
+     end while;
+end $
+</code></pre><blockquote>
+<p>备注：三种循环结构的比较<br>while 先判断后执行； repeat先执行后判断； loop没有限制的死循环，必须加限制条件；    </p>
+</blockquote>
+<h2 id="Part-5-MySQL基础结语"><a href="#Part-5-MySQL基础结语" class="headerlink" title="Part 5:MySQL基础结语"></a>Part 5:MySQL基础结语</h2><p>MySQL是必备技能，基础部分的内容比较好学。后续将继续更新MySQL高级的内容。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2020/02/23/MySQL基础6/';
+        this.page.identifier = '/2020/02/23/MySQL基础6/';
+      };
+      var oldLoad = window.onload;
+      window.onload = function () {
+        var d = document, s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.src = '//' + 'Fluid-dev' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+        powered by Disqus.</a></noscript>
+  </div>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MySQL基础6&nbsp;",
+      ],
+      cursorChar: "守拙",
+      typeSpeed: 70,
+      loop: ture,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
